@@ -1,19 +1,23 @@
 from pymongo import MongoClient
 
-myclient=MongoClient(host='114.32.122.25',port=27017,username='mongo_root',password='Password777!Here')
-db = myclient['test']
-collection = db['students']
-def insert():
-    student = {
-        'id': '20170101',
-        'name': 'Jordan',
-        'age': 20,
-        'gender': 'male'
-    }
-    result = collection.insert(student)
-    print(result)
-def search():
-    d= collection.find_one()
-    print(d)
-    
-search()
+
+# DB封裝
+class DB ():
+    def __init__(self, pHost='114.32.122.25', pPort=27017, pUsername='mongo_root', pPassword='Password777!Here'):
+        self.myclient = MongoClient(
+            host=pHost, port=pPort, username=pUsername, password=pPassword)
+
+    def Insert(self, data, pDBName='test', pCollectionName='students'):
+        db = self.myclient[pDBName]
+        collection = db[pCollectionName]
+        result = collection.insert(data)
+        return result
+
+    def search(self, query, pDBName='test', pCollectionName='students'):
+        db = self.myclient[pDBName]
+        collection = db[pCollectionName]
+        d = collection.find_one()
+        return d
+
+db=DB()
+print(db.search(''))
