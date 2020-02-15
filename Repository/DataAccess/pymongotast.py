@@ -1,9 +1,14 @@
 from pymongo import MongoClient
+import configparser
+config = configparser.ConfigParser()  
+config.read('config.ini')
 
 
 # DB封裝
 class DB ():
-    def __init__(self, pHost='114.32.122.25', pPort=27017, pUsername='mongo_root', pPassword='Password777!Here'):
+    def __init__(self, pHost=config['DATABASE']['HOST'], pPort=int(config['DATABASE']['PORT']),
+     pUsername=config['DATABASE']['USERNAME'], 
+     pPassword=config['DATABASE']['PASSWORD']):
         self.myclient = MongoClient(
             host=pHost, port=pPort, username=pUsername, password=pPassword)
 
