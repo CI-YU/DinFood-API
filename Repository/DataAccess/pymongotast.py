@@ -13,11 +13,38 @@ class DB ():
         result = collection.insert(data)
         return result
 
-    def search(self, query, pDBName='test', pCollectionName='students'):
+    def Search(self, pQuery, pDBName='test', pCollectionName='students'):
         db = self.myclient[pDBName]
         collection = db[pCollectionName]
-        d = collection.find_one()
+        d = collection.find(pQuery)
         return d
 
-db=DB()
-print(db.search(''))
+    def UpdateOne(self, pQuery, pNewVal, pDBName='test', pCollectionName='students'):
+        db = self.myclient[pDBName]
+        collection = db[pCollectionName]
+        x = collection.update_one(pQuery, pNewVal)
+        return x
+
+    def UpdateMany(self, pQuery, pNewVal, pDBName='test', pCollectionName='students'):
+        db = self.myclient[pDBName]
+        collection = db[pCollectionName]
+        x = collection.update_many(pQuery, pNewVal)
+        return x
+
+    def DeleteOne(self, pQuery, pNewVal, pDBName='test', pCollectionName='students'):
+        db = self.myclient[pDBName]
+        collection = db[pCollectionName]
+        x = collection.delete_one(pQuery)
+        return x
+
+    def DeleteMany(self, pQuery, pNewVal, pDBName='test', pCollectionName='students'):
+        db = self.myclient[pDBName]
+        collection = db[pCollectionName]
+        x = collection.delete_many(pQuery)
+        return x
+
+
+db = DB()
+d = db.Search(pQuery={'id': '20170101'})
+for x in d:
+    print(x)
