@@ -1,6 +1,10 @@
 from pymongo import MongoClient
-
-myclient=MongoClient(host='114.32.122.25',port=27017,username='mongo_root',password='Password777!Here')
+import configparser
+config = configparser.ConfigParser()  
+config.read('config.ini')
+p = config['DATABASE']['PORT']
+myclient=MongoClient(host=config['DATABASE']['HOST'],
+port=int(p),username=config['DATABASE']['USERNAME'],password=config['DATABASE']['PASSWORD'])
 db = myclient['test']
 collection = db['students']
 def insert():
