@@ -18,6 +18,12 @@ class DB ():
         result = collection.insert(data)
         return result
 
+    def SearchAll(self, pDBName='test', pCollectionName='students'):
+        db = self.myclient[pDBName]
+        collection = db[pCollectionName]
+        d = collection.find()
+        return d
+
     def Search(self, pQuery, pDBName='test', pCollectionName='students'):
         db = self.myclient[pDBName]
         collection = db[pCollectionName]
@@ -50,6 +56,7 @@ class DB ():
 
 
 db = DB()
-d = db.Search(pQuery={'id': '20170101'})
+pQuery={"$or":[ {'id':'20170101'}, {'id':'20170101'}]}
+d = db.Search(pQuery)
 for x in d:
     print(x)
