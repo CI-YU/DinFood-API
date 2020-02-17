@@ -2,11 +2,13 @@ from pymongo import MongoClient
 import configparser
 config = configparser.ConfigParser()  
 config.read('config.ini')
+#region 參數
 host = config['DATABASE']['HOST']
 port = int(config['DATABASE']['PORT'])
 username = config['DATABASE']['USERNAME']
 password = config['DATABASE']['PASSWORD']
 collection = 'students'
+#endregion
 
 
 # DB封裝
