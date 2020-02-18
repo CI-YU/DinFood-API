@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import configparser
 config = configparser.ConfigParser()  
 config.read('config.ini')
-#region 參數55
+#region 參數55s
 host = config['DATABASE']['HOST']
 port = int(config['DATABASE']['PORT'])
 username = config['DATABASE']['USERNAME']
