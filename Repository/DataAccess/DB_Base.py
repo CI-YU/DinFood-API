@@ -4,6 +4,8 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 #region 參數55s
 host = config['DATABASE']['HOST']
+host3 = config['DATABASE']['HOST']
+pp = host3
 port = int(config['DATABASE']['PORT'])
 username = config['DATABASE']['USERNAME']
 password = config['DATABASE']['PASSWORD']
