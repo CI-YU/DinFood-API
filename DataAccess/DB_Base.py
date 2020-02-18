@@ -69,3 +69,4 @@ pQuery={"$or":[ {'id':'20170101'}, {'id':'20170101'}]}
 d = db.Search(pQuery)
 for x in d:
     print(x)
+
