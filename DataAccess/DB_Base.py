@@ -4,13 +4,11 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 #region 參數55s
 host = config['DATABASE']['HOST']
-host23 = config['DATABASE']['HOST']
-pp = host23
 port = int(config['DATABASE']['PORT'])
 username = config['DATABASE']['USERNAME']
 password = config['DATABASE']['PASSWORD']
 collection = 'students'
-collection = 'c3'
+b=99
 #endregion
 
 
