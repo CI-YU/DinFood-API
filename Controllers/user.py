@@ -1,22 +1,17 @@
 from flask import Flask
-from flask_restplus import Resource ,Api,fields
-from flask_restplus import reqparse
-
-users = [{'name':'kirai'},]
+from flask_restplus import Resource, Api, fields, Namespace, reqparse
+users = [{'name': 'kirai'}, ]
 app = Flask(__name__)
-api = Api(app)
-ns = api.namespace('user', description='user operations')
-# todo = api.model('Todo', {
-#     'email': fields.String(readonly=True, description='The email'),
-#     'password': fields.String(required=True, description='The password')
-# })
-@api.route('/user')
+ns = Namespace('user', description='user operations')
+@ns.route('/user')
 class User (Resource):
-    #region post解析器
-    parser=reqparse.RequestParser()
-    parser.add_argument('email',required=True,help='Email is required')
+    '''User'''
+    # region post解析器
+    parser = reqparse.RequestParser()
+    parser.add_argument('email', required=True, help='Email is required')
     parser.add_argument('password', required=True, help='Password is required')
-    #endregion
+    # endregion
+
     def get(self, name):
         find = [item for item in users if item['name'] == name]
         if len(find) == 0:
@@ -32,10 +27,13 @@ class User (Resource):
             'message': '',
             'user': user
         }
+
+    @ns.doc('Add_user')
     @ns.param('email', 'The email')
     @ns.param('password', 'The password')
     def post(self, name):
-        arg=self.parser.parse_args()
+        '''Add user'''
+        arg = self.parser.parse_args()
         user = {
             'name': name,
             'email': arg['email'],
@@ -46,11 +44,15 @@ class User (Resource):
             'message': 'Insert user success',
             'user': user
         }
+
     def put(self, name):
         pass
+
     def delete(self, name):
         pass
-@api.route('/users')   
+
+@ns.route('/users')
 class Users(Resource):
-  def get(self):
-      return {'users':users}
+    def get(self):
+        '''Get all user'''
+        return {'users': users}
